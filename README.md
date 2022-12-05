@@ -19,7 +19,7 @@ Raspberry Pi Pico MicroPython用の漢字フォントドライバーライブラ
 - UTF-8形式の文字の利用が可能です。
 - フォントデータはRaspbery Pi picoのフラッシュメモリ上に配置します。 
 - フォントデータ形式  
-    <img src="img/type1.PNG" width="300">  
+    <img src="img/type1.png" width="300">  
   ※ 赤い数値はバイトデータの並び順  
 - (注意)  
 このフォントデータには半角カタカナは含まれておりません。  
