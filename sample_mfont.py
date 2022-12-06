@@ -1,4 +1,3 @@
-import os
 from tma_jp_utl import isHkana, hkana2kana, han2zen, binfind
 from random import randint
 from mfont import mfont

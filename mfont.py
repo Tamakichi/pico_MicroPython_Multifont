@@ -1,7 +1,6 @@
 # This is Japanese font library for MicroPython
-# 2022/12/01 v1.00 by Tamakichi-San
+# 2022/12/06 v1.01 by Tamakichi-San
 
-import os
 from tma_jp_utl import isHkana, hkana2kana, han2zen, binfind
 
 # フォント管理クラス
@@ -14,7 +13,6 @@ class mfont:
     MFONT20 = 5    # 20ドットJiskanフォント
     MFONT24 = 6    # 24ドットXフォントト
 
-    flgBegin = False
     path = ""
 
     # フォント種別テーブル
@@ -40,6 +38,7 @@ class mfont:
     )
 
     def __init__(self,sz=16,path=""):
+        self.flgBegin = False
         self.setFontSize(sz)
         self.path=path
 
@@ -67,20 +66,20 @@ class mfont:
                 
     # 利用サイズの設定
     def setFontSize(self, sz):
-      if sz < 10:
-        self.selectFont(self.MFONT8)
-      elif sz < 12:
-        self.selectFont(self.MFONT10) 
-      elif sz < 14:
-        self.selectFont(self.MFONT12)
-      elif sz < 16:
-        self.selectFont(self.MFONT14)
-      elif sz < 20:
-        self.selectFont(self.MFONT16)
-      elif sz < 24:
-        self.selectFont(self.MFONT20)
-      else:
-        self.selectFont(self.MFONT24)
+        if sz < 10:
+            self.selectFont(self.MFONT8)
+        elif sz < 12:
+            self.selectFont(self.MFONT10) 
+        elif sz < 14:
+            self.selectFont(self.MFONT12)
+        elif sz < 16:
+            self.selectFont(self.MFONT14)
+        elif sz < 20:
+            self.selectFont(self.MFONT16)
+        elif sz < 24:
+            self.selectFont(self.MFONT20)
+        else:
+            self.selectFont(self.MFONT24)
 
     # 直前に取得したフォントの1行あたりのフォントデータバイト数の取得
     def getRowLength(self):
@@ -113,7 +112,7 @@ class mfont:
     # インデックスファイルの検索
     def find(self, code, index_size, offset):
         if not self.flgBegin:
-           return -1 
+            return -1 
         
         def get_at(pos):
             self.f_r.seek(pos*2+offset)
@@ -124,7 +123,7 @@ class mfont:
     # 指定した位置の取得
     def get_fontdata(self, pos, font_bytes, offset):
         if not self.flgBegin:
-           return []
+            return []
         self.f_r.seek(pos+offset)
         font_data = [int(d) for d in self.f_r.read(font_bytes)]
         return font_data
