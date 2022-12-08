@@ -521,7 +521,7 @@ for sz in (14,):
 ````
 
 実行結果  
-![sample2](img/sample2.png) 
+![sample2](img/sample2.jpg) 
 
 
 ## ライセンス・使用条件
