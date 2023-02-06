@@ -1,33 +1,27 @@
-from tma_jp_utl import isHkana, hkana2kana, han2zen, binfind
-from random import randint
+# コンソールに漢字を表示するサンプルプログラム
 from mfont import mfont
 
-# ビットパターン表示
-# d: 8ビットパターンデータ
-def bitdisp(d):
-    for i in range(8):
-        if d & 0x80>>i:
-            print("##",end="")
-        else:
-            print("  ",end="")
+# 定数
+MY_FONT_SIZE = 16  # 使用するフォントサイズ
 
 # フォントデータの表示
 # font : フォントデータ（リスト）
-# bn:横バイト数
-def fontdump(font,bn):
-    for i in range(0,len(font),bn):
+# w:横ドット数
+def fontdump(font, w):
+    bn = (w+7)>>3
+    for i in range(0, len(font), bn):
         for j in range(bn):
-            bitdisp(font[i+j])
+            for k in range(8 if (j+1)*8 <=w else w % 8):
+                print("##" if font[i+j] & 0x80>>k else "  ",end="")
         print()
     print()    
 
 s="こんにちは世界！、こんにちは埼玉！"
-mf = mfont(16)
+mf = mfont(MY_FONT_SIZE)
 mf.begin()
 for c in s:
     code = ord(c)
     font = mf.getFont(code)
-    lb = mf.getRowLength()
-    print(hex(code),":",mf.getWidth(),"x",mf.getHeight())
-    fontdump(font, lb)
+    print(hex(code), ":", mf.getWidth(), "x", mf.getHeight())
+    fontdump(font, mf.getWidth())
 mf.end()
