@@ -1,8 +1,8 @@
+# NeoPixel ドットマトリックス表示ドライバ
 from machine import Pin
 from neopixel import NeoPixel
 import time
 
-"""NeoPixel マトリック表示表示ドライバー"""
 class NeoMatrix:
     width  = 8
     height = 8
@@ -44,10 +44,7 @@ class NeoMatrix:
     def putBitmap(self, bmp, fg, bg, flgUpdate=False):
         for y in range(0,self.height-1):
             for x in range(0,self.width-1):
-                if (0x80>>x) & bmp[y]:
-                    self.np[XYtoNo(x,y)] = fg
-                else:
-                    self.np[XYtoNo(x,y)] = bg
+                self.np[XYtoNo(x,y)] = fg if (0x80>>x) & bmp[y] else bg
         if flgUpdate:
             self.np.write()
 
@@ -64,12 +61,8 @@ class NeoMatrix:
     def scrollIn(self, fnt, color, tm, ypos=0, fw=8, fh=8):
         for i in range(0,fh):
             self.scroll()
-            # フォントパターン1列分のセット
-            for j in range(0,fw):
-              if (fnt[j] & (0x80 >> i)):
-                 self.np[self.XYtoNo(self.width-1,j+ypos)] = color
-              else:
-                 self.np[self.XYtoNo(self.width-1,j+ypos)] = (0, 0, 0)        
+            for j in range(0,fw): # フォントパターン1列分のセット
+                self.np[self.XYtoNo(self.width-1,j+ypos)] = color if fnt[j] & (0x80 >> i) else (0, 0, 0)
             self.np.write()
             time.sleep_ms(tm)
 
@@ -79,8 +72,7 @@ class NeoMatrix:
         dy=abs(y1-y0)
         sx=(0 < (x1-x0)) - ((x1-x0) < 0)
         sy=(0 < (y1-y0)) - ((y1-y0) < 0)
-        err=dx-dy
-       
+        err=dx-dy   
         if (x0!=x1) or (y0!=y1): 
             self.np[self.XYtoNo(x1,y1)] = color
 
@@ -115,15 +107,8 @@ class NeoMatrix:
             # 矩形塗りつぶし
             w = abs(x1-x2)
             h = abs(y1-y2)
-            if x1>=x2:
-                x=x2
-            else:
-                x=x1
-            if y1>=y2:
-                y=y2
-            else:
-                y=y1
-                
+            x=x2 if x1>=x2 else x1
+            y=y2 if y1>=y2 else y1
             for i in range(0,h+1):
                 self.drawline(x,y+i,x+w,y+i,color,False)      
         if flg:

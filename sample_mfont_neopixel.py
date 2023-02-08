@@ -3,10 +3,9 @@ from micropython import const
 from machine import Pin
 from time import sleep_ms
 from mfont import mfont
-from neopixel import NeoPixel
 from device.neomatrix import NeoMatrix
 
-# 定数
+# 定数(デフォルトは、Seeed XIAO RP2040用)
 MY_FONT_SIZE = const(12)       # 使用するフォントサイズ(8,10,12,14,16,20,24)
 DIN_PIN      = const(26)       # Neopixcel データピン
 MATRIX_W     = const(16)       # Neopixcel 横ドット数
