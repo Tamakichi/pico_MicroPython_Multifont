@@ -1,4 +1,4 @@
-# pico_MicroPython_Multiifont
+# pico_MicroPython_Multifont 
 
 Raspberry Pi Pico MicroPython用のマルチフォントライブラリ
 
