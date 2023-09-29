@@ -672,3 +672,14 @@ while True:
 
 再配布については、本構成のままであれば自由とします。  
 フォントファイルのみの配布は禁止します。  
+
+## 関連記事
+
+・ブログ Raspberry Pi Pico MicroPython用のマルチフォントライブラリ  
+　https://nuneno.cocolog-nifty.com/blog/2023/02/post-730291.html
+
+・NeoPixce;表示デモ(Yotube)  
+[![Watch the video](https://img.youtube.com/vi/ZsICLQkGRXE/hqdefault.jpg)](https://www.youtube.com/embed/ZsICLQkGRXE)  
+
+・OLED表示デモ(Yotube)  
+[![Watch the video](https://img.youtube.com/vi/WT0oQsmrokw/hqdefault.jpg)](https://www.youtube.com/embed/WT0oQsmrokw)  
